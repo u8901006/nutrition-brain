@@ -7,6 +7,26 @@ const MODELS = ["glm-5-turbo", "glm-4.7", "glm-4.7-flash"];
 const MAX_TOKENS = 100000;
 const TIMEOUT = 660000;
 
+async function fetchWithRetry(url, options, retries = 3) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), options.timeoutMs || TIMEOUT);
+      const resp = await fetch(url, { ...options, signal: controller.signal });
+      clearTimeout(timer);
+      return resp;
+    } catch (e) {
+      if (i < retries - 1) {
+        const wait = 10000 * (i + 1);
+        console.error(`[WARN] fetch failed (attempt ${i + 1}), retrying in ${wait / 1000}s: ${e.message}`);
+        await new Promise((r) => setTimeout(r, wait));
+      } else {
+        throw e;
+      }
+    }
+  }
+}
+
 const SYSTEM_PROMPT = `你是營養醫學領域的資深研究員與科學傳播者。你的任務是：
 1. 從提供的醫學文獻中，篩選出最具臨床意義與研究價值的論文
 2. 對每篇論文進行繁體中文摘要、分類、PICO 分析
@@ -126,7 +146,7 @@ ${papersText}
     for (let attempt = 0; attempt < 3; attempt++) {
       try {
         console.error(`[INFO] Trying ${model} (attempt ${attempt + 1})...`);
-        const resp = await fetch(`${API_BASE}/chat/completions`, {
+        const resp = await fetchWithRetry(`${API_BASE}/chat/completions`, {
           method: "POST",
           headers,
           body: JSON.stringify({
@@ -139,8 +159,8 @@ ${papersText}
             top_p: 0.9,
             max_tokens: MAX_TOKENS,
           }),
-          signal: AbortSignal.timeout(TIMEOUT),
-        });
+          timeoutMs: TIMEOUT,
+        }, 3);
 
         if (resp.status === 429) {
           const wait = 60000 * (attempt + 1);

@@ -1,0 +1,11 @@
+﻿2026-04-16T09:23:57.0328085Z ##[group]Run node scripts/fetch_papers.mjs \
+2026-04-16T09:23:57.0328682Z [36;1mnode scripts/fetch_papers.mjs \[0m
+2026-04-16T09:23:57.0329166Z [36;1m  --days 7 \[0m
+2026-04-16T09:23:57.0329573Z [36;1m  --max-papers 50 \[0m
+2026-04-16T09:23:57.0330012Z [36;1m  --output papers.json[0m
+2026-04-16T09:23:57.0351657Z shell: /usr/bin/bash -e {0}
+2026-04-16T09:23:57.0352087Z ##[endgroup]
+2026-04-16T09:23:57.0683780Z [INFO] Searching PubMed for nutrition papers from last 7 days...
+2026-04-16T09:23:58.3715763Z [INFO] Found 50 papers
+2026-04-16T09:23:58.8452382Z [INFO] Fetched details for 50 papers
+2026-04-16T09:23:58.8457081Z [INFO] Saved to papers.json

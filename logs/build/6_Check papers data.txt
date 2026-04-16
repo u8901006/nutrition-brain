@@ -1,0 +1,13 @@
+﻿2026-04-16T09:23:58.8568264Z ##[group]Run if [ -f papers.json ] && grep -q '"count"' papers.json; then
+2026-04-16T09:23:58.8568792Z [36;1mif [ -f papers.json ] && grep -q '"count"' papers.json; then[0m
+2026-04-16T09:23:58.8569343Z [36;1m  COUNT=$(node -e "const d=require('./papers.json');process.stdout.write(String(d.count||0))")[0m
+2026-04-16T09:23:58.8569856Z [36;1m  echo "count=$COUNT" >> "$GITHUB_OUTPUT"[0m
+2026-04-16T09:23:58.8570149Z [36;1m  echo "Papers found: $COUNT"[0m
+2026-04-16T09:23:58.8570384Z [36;1melse[0m
+2026-04-16T09:23:58.8570895Z [36;1m  echo "count=0" >> "$GITHUB_OUTPUT"[0m
+2026-04-16T09:23:58.8571243Z [36;1m  echo '{"date":"2026-04-16","count":0,"papers":[]}' > papers.json[0m
+2026-04-16T09:23:58.8571631Z [36;1m  echo "No papers found, will generate empty report"[0m
+2026-04-16T09:23:58.8571926Z [36;1mfi[0m
+2026-04-16T09:23:58.8594196Z shell: /usr/bin/bash -e {0}
+2026-04-16T09:23:58.8594444Z ##[endgroup]
+2026-04-16T09:23:58.8918109Z Papers found: 50

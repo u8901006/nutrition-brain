@@ -1,0 +1,11 @@
+﻿2026-04-16T09:23:57.0121893Z ##[group]Run if [ -n "" ]; then
+2026-04-16T09:23:57.0122505Z [36;1mif [ -n "" ]; then[0m
+2026-04-16T09:23:57.0123039Z [36;1m  echo "target=" >> "$GITHUB_OUTPUT"[0m
+2026-04-16T09:23:57.0123577Z [36;1melse[0m
+2026-04-16T09:23:57.0124054Z [36;1m  TARGET=$(TZ=Asia/Taipei date +%Y-%m-%d)[0m
+2026-04-16T09:23:57.0124678Z [36;1m  echo "target=$TARGET" >> "$GITHUB_OUTPUT"[0m
+2026-04-16T09:23:57.0125228Z [36;1mfi[0m
+2026-04-16T09:23:57.0125754Z [36;1mecho "Date: $(grep target "$GITHUB_OUTPUT" | cut -d= -f2)"[0m
+2026-04-16T09:23:57.0163030Z shell: /usr/bin/bash -e {0}
+2026-04-16T09:23:57.0163547Z ##[endgroup]
+2026-04-16T09:23:57.0274142Z Date: 2026-04-16

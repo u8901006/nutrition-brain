@@ -1,0 +1,195 @@
+﻿2026-04-16T09:23:54.6995540Z Current runner version: '2.333.1'
+2026-04-16T09:23:54.7019205Z ##[group]Runner Image Provisioner
+2026-04-16T09:23:54.7020012Z Hosted Compute Agent
+2026-04-16T09:23:54.7020736Z Version: 20260213.493
+2026-04-16T09:23:54.7021449Z Commit: 5c115507f6dd24b8de37d8bbe0bb4509d0cc0fa3
+2026-04-16T09:23:54.7022145Z Build Date: 2026-02-13T00:28:41Z
+2026-04-16T09:23:54.7022799Z Worker ID: {ff8e2f0e-dfdf-4c25-b08d-f2f34f3ae21f}
+2026-04-16T09:23:54.7023544Z Azure Region: westus
+2026-04-16T09:23:54.7024048Z ##[endgroup]
+2026-04-16T09:23:54.7025788Z ##[group]Operating System
+2026-04-16T09:23:54.7026517Z Ubuntu
+2026-04-16T09:23:54.7026961Z 24.04.4
+2026-04-16T09:23:54.7027422Z LTS
+2026-04-16T09:23:54.7027871Z ##[endgroup]
+2026-04-16T09:23:54.7028380Z ##[group]Runner Image
+2026-04-16T09:23:54.7028930Z Image: ubuntu-24.04
+2026-04-16T09:23:54.7029437Z Version: 20260406.80.1
+2026-04-16T09:23:54.7030867Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260406.80/images/ubuntu/Ubuntu2404-Readme.md
+2026-04-16T09:23:54.7032389Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260406.80
+2026-04-16T09:23:54.7033295Z ##[endgroup]
+2026-04-16T09:23:54.7034342Z ##[group]GITHUB_TOKEN Permissions
+2026-04-16T09:23:54.7036352Z Contents: write
+2026-04-16T09:23:54.7036886Z Metadata: read
+2026-04-16T09:23:54.7037455Z ##[endgroup]
+2026-04-16T09:23:54.7039532Z Secret source: Actions
+2026-04-16T09:23:54.7040668Z Prepare workflow directory
+2026-04-16T09:23:54.7375435Z Prepare all required actions
+2026-04-16T09:23:54.7416398Z Getting action download info
+2026-04-16T09:23:55.2455837Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-04-16T09:23:55.3993786Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-04-16T09:23:55.5828585Z Complete job name: build
+2026-04-16T09:23:55.6559872Z ##[group]Run actions/checkout@v4
+2026-04-16T09:23:55.6560949Z with:
+2026-04-16T09:23:55.6561335Z   fetch-depth: 0
+2026-04-16T09:23:55.6561790Z   repository: u8901006/nutrition-brain
+2026-04-16T09:23:55.6562473Z   token: ***
+2026-04-16T09:23:55.6562851Z   ssh-strict: true
+2026-04-16T09:23:55.6563252Z   ssh-user: git
+2026-04-16T09:23:55.6563649Z   persist-credentials: true
+2026-04-16T09:23:55.6564093Z   clean: true
+2026-04-16T09:23:55.6564496Z   sparse-checkout-cone-mode: true
+2026-04-16T09:23:55.6564965Z   fetch-tags: false
+2026-04-16T09:23:55.6565369Z   show-progress: true
+2026-04-16T09:23:55.6565806Z   lfs: false
+2026-04-16T09:23:55.6566179Z   submodules: false
+2026-04-16T09:23:55.6566583Z   set-safe-directory: true
+2026-04-16T09:23:55.6567268Z ##[endgroup]
+2026-04-16T09:23:55.7672971Z Syncing repository: u8901006/nutrition-brain
+2026-04-16T09:23:55.7674674Z ##[group]Getting Git version info
+2026-04-16T09:23:55.7675495Z Working directory is '/home/runner/work/nutrition-brain/nutrition-brain'
+2026-04-16T09:23:55.7676506Z [command]/usr/bin/git version
+2026-04-16T09:23:55.7726274Z git version 2.53.0
+2026-04-16T09:23:55.7754222Z ##[endgroup]
+2026-04-16T09:23:55.7768766Z Temporarily overriding HOME='/home/runner/work/_temp/49a787bd-e41d-4835-874f-411b15da9bc4' before making global git config changes
+2026-04-16T09:23:55.7771610Z Adding repository directory to the temporary git global config as a safe directory
+2026-04-16T09:23:55.7784961Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/nutrition-brain/nutrition-brain
+2026-04-16T09:23:55.7820384Z Deleting the contents of '/home/runner/work/nutrition-brain/nutrition-brain'
+2026-04-16T09:23:55.7824669Z ##[group]Initializing the repository
+2026-04-16T09:23:55.7829889Z [command]/usr/bin/git init /home/runner/work/nutrition-brain/nutrition-brain
+2026-04-16T09:23:55.7934864Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-04-16T09:23:55.7936914Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-04-16T09:23:55.7938826Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-04-16T09:23:55.7941016Z hint: call:
+2026-04-16T09:23:55.7942114Z hint:
+2026-04-16T09:23:55.7943220Z hint: 	git config --global init.defaultBranch <name>
+2026-04-16T09:23:55.7944563Z hint:
+2026-04-16T09:23:55.7945852Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-04-16T09:23:55.7947782Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-04-16T09:23:55.7949335Z hint:
+2026-04-16T09:23:55.7950275Z hint: 	git branch -m <name>
+2026-04-16T09:23:55.7951957Z hint:
+2026-04-16T09:23:55.7953340Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-04-16T09:23:55.7955604Z Initialized empty Git repository in /home/runner/work/nutrition-brain/nutrition-brain/.git/
+2026-04-16T09:23:55.7959491Z [command]/usr/bin/git remote add origin https://github.com/u8901006/nutrition-brain
+2026-04-16T09:23:55.7989784Z ##[endgroup]
+2026-04-16T09:23:55.7991293Z ##[group]Disabling automatic garbage collection
+2026-04-16T09:23:55.7992354Z [command]/usr/bin/git config --local gc.auto 0
+2026-04-16T09:23:55.8013860Z ##[endgroup]
+2026-04-16T09:23:55.8015039Z ##[group]Setting up auth
+2026-04-16T09:23:55.8020405Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-04-16T09:23:55.8051968Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-04-16T09:23:55.8358462Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-04-16T09:23:55.8386918Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-04-16T09:23:55.8598064Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-04-16T09:23:55.8625784Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-04-16T09:23:55.8851938Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-04-16T09:23:55.8886711Z ##[endgroup]
+2026-04-16T09:23:55.8887977Z ##[group]Fetching the repository
+2026-04-16T09:23:55.8896555Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+2026-04-16T09:23:56.4233549Z From https://github.com/u8901006/nutrition-brain
+2026-04-16T09:23:56.4235073Z  * [new branch]      main       -> origin/main
+2026-04-16T09:23:56.4270781Z [command]/usr/bin/git branch --list --remote origin/main
+2026-04-16T09:23:56.4294399Z   origin/main
+2026-04-16T09:23:56.4304902Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+2026-04-16T09:23:56.4326215Z 344aefc4b0c00b190afe9007eaeb591ecf713af7
+2026-04-16T09:23:56.4333719Z ##[endgroup]
+2026-04-16T09:23:56.4335359Z ##[group]Determining the checkout info
+2026-04-16T09:23:56.4337252Z ##[endgroup]
+2026-04-16T09:23:56.4338323Z [command]/usr/bin/git sparse-checkout disable
+2026-04-16T09:23:56.4378097Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-04-16T09:23:56.4408343Z ##[group]Checking out the ref
+2026-04-16T09:23:56.4412499Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-04-16T09:23:56.4457026Z Switched to a new branch 'main'
+2026-04-16T09:23:56.4459127Z branch 'main' set up to track 'origin/main'.
+2026-04-16T09:23:56.4466540Z ##[endgroup]
+2026-04-16T09:23:56.4499458Z [command]/usr/bin/git log -1 --format=%H
+2026-04-16T09:23:56.4521913Z 344aefc4b0c00b190afe9007eaeb591ecf713af7
+2026-04-16T09:23:56.4821965Z ##[group]Run actions/setup-node@v4
+2026-04-16T09:23:56.4822999Z with:
+2026-04-16T09:23:56.4823688Z   node-version: 24
+2026-04-16T09:23:56.4824460Z   always-auth: false
+2026-04-16T09:23:56.4825266Z   check-latest: false
+2026-04-16T09:23:56.4826347Z   token: ***
+2026-04-16T09:23:56.4827274Z ##[endgroup]
+2026-04-16T09:23:56.6636116Z Found in cache @ /opt/hostedtoolcache/node/24.14.1/x64
+2026-04-16T09:23:56.6644894Z ##[group]Environment details
+2026-04-16T09:23:56.9976105Z node: v24.14.1
+2026-04-16T09:23:56.9977132Z npm: 11.11.0
+2026-04-16T09:23:56.9977700Z yarn: 1.22.22
+2026-04-16T09:23:56.9978909Z ##[endgroup]
+2026-04-16T09:23:57.0121914Z ##[group]Run if [ -n "" ]; then
+2026-04-16T09:23:57.0122510Z [36;1mif [ -n "" ]; then[0m
+2026-04-16T09:23:57.0123043Z [36;1m  echo "target=" >> "$GITHUB_OUTPUT"[0m
+2026-04-16T09:23:57.0123580Z [36;1melse[0m
+2026-04-16T09:23:57.0124059Z [36;1m  TARGET=$(TZ=Asia/Taipei date +%Y-%m-%d)[0m
+2026-04-16T09:23:57.0124682Z [36;1m  echo "target=$TARGET" >> "$GITHUB_OUTPUT"[0m
+2026-04-16T09:23:57.0125231Z [36;1mfi[0m
+2026-04-16T09:23:57.0125759Z [36;1mecho "Date: $(grep target "$GITHUB_OUTPUT" | cut -d= -f2)"[0m
+2026-04-16T09:23:57.0163048Z shell: /usr/bin/bash -e {0}
+2026-04-16T09:23:57.0163552Z ##[endgroup]
+2026-04-16T09:23:57.0274187Z Date: 2026-04-16
+2026-04-16T09:23:57.0328104Z ##[group]Run node scripts/fetch_papers.mjs \
+2026-04-16T09:23:57.0328687Z [36;1mnode scripts/fetch_papers.mjs \[0m
+2026-04-16T09:23:57.0329171Z [36;1m  --days 7 \[0m
+2026-04-16T09:23:57.0329577Z [36;1m  --max-papers 50 \[0m
+2026-04-16T09:23:57.0330016Z [36;1m  --output papers.json[0m
+2026-04-16T09:23:57.0351668Z shell: /usr/bin/bash -e {0}
+2026-04-16T09:23:57.0352091Z ##[endgroup]
+2026-04-16T09:23:57.0683815Z [INFO] Searching PubMed for nutrition papers from last 7 days...
+2026-04-16T09:23:58.3715828Z [INFO] Found 50 papers
+2026-04-16T09:23:58.8452431Z [INFO] Fetched details for 50 papers
+2026-04-16T09:23:58.8457099Z [INFO] Saved to papers.json
+2026-04-16T09:23:58.8568276Z ##[group]Run if [ -f papers.json ] && grep -q '"count"' papers.json; then
+2026-04-16T09:23:58.8568796Z [36;1mif [ -f papers.json ] && grep -q '"count"' papers.json; then[0m
+2026-04-16T09:23:58.8569347Z [36;1m  COUNT=$(node -e "const d=require('./papers.json');process.stdout.write(String(d.count||0))")[0m
+2026-04-16T09:23:58.8569860Z [36;1m  echo "count=$COUNT" >> "$GITHUB_OUTPUT"[0m
+2026-04-16T09:23:58.8570152Z [36;1m  echo "Papers found: $COUNT"[0m
+2026-04-16T09:23:58.8570387Z [36;1melse[0m
+2026-04-16T09:23:58.8570900Z [36;1m  echo "count=0" >> "$GITHUB_OUTPUT"[0m
+2026-04-16T09:23:58.8571247Z [36;1m  echo '{"date":"2026-04-16","count":0,"papers":[]}' > papers.json[0m
+2026-04-16T09:23:58.8571634Z [36;1m  echo "No papers found, will generate empty report"[0m
+2026-04-16T09:23:58.8571928Z [36;1mfi[0m
+2026-04-16T09:23:58.8594203Z shell: /usr/bin/bash -e {0}
+2026-04-16T09:23:58.8594455Z ##[endgroup]
+2026-04-16T09:23:58.8918155Z Papers found: 50
+2026-04-16T09:23:58.8962030Z ##[group]Run node scripts/generate_report.mjs \
+2026-04-16T09:23:58.8962402Z [36;1mnode scripts/generate_report.mjs \[0m
+2026-04-16T09:23:58.8962682Z [36;1m  --input papers.json \[0m
+2026-04-16T09:23:58.8962967Z [36;1m  --output "docs/fitness-2026-04-16.html" \[0m
+2026-04-16T09:23:58.8963268Z [36;1m  --date "2026-04-16"[0m
+2026-04-16T09:23:58.8984913Z shell: /usr/bin/bash -e {0}
+2026-04-16T09:23:58.8985157Z env:
+2026-04-16T09:23:58.8985543Z   ZHIPU_API_KEY: ***
+2026-04-16T09:23:58.8985752Z ##[endgroup]
+2026-04-16T09:23:58.9322680Z [INFO] Trying glm-5-turbo (attempt 1)...
+2026-04-16T09:29:00.3653703Z [ERROR] glm-5-turbo failed: fetch failed
+2026-04-16T09:29:05.3712896Z [INFO] Trying glm-5-turbo (attempt 2)...
+2026-04-16T09:34:06.6533701Z [ERROR] glm-5-turbo failed: fetch failed
+2026-04-16T09:34:11.6591066Z [INFO] Trying glm-5-turbo (attempt 3)...
+2026-04-16T09:34:13.4332377Z [WARN] Rate limited, waiting 180s...
+2026-04-16T09:37:13.5134649Z [INFO] Trying glm-4.7 (attempt 1)...
+2026-04-16T09:42:14.7968454Z [ERROR] glm-4.7 failed: fetch failed
+2026-04-16T09:42:19.8021944Z [INFO] Trying glm-4.7 (attempt 2)...
+2026-04-16T09:47:21.0778755Z [ERROR] glm-4.7 failed: fetch failed
+2026-04-16T09:47:26.0812112Z [INFO] Trying glm-4.7 (attempt 3)...
+2026-04-16T09:52:27.3562342Z [ERROR] glm-4.7 failed: fetch failed
+2026-04-16T09:52:27.3563712Z [INFO] Trying glm-4.7-flash (attempt 1)...
+2026-04-16T09:54:07.8953463Z ##[error]The operation was canceled.
+2026-04-16T09:54:07.9083727Z Post job cleanup.
+2026-04-16T09:54:08.0011535Z [command]/usr/bin/git version
+2026-04-16T09:54:08.0047700Z git version 2.53.0
+2026-04-16T09:54:08.0091985Z Temporarily overriding HOME='/home/runner/work/_temp/2a2a57f6-4af0-4322-a3d1-fc40228d99bc' before making global git config changes
+2026-04-16T09:54:08.0093341Z Adding repository directory to the temporary git global config as a safe directory
+2026-04-16T09:54:08.0098030Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/nutrition-brain/nutrition-brain
+2026-04-16T09:54:08.0138470Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-04-16T09:54:08.0179190Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-04-16T09:54:08.0419078Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-04-16T09:54:08.0440699Z http.https://github.com/.extraheader
+2026-04-16T09:54:08.0452832Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-04-16T09:54:08.0481802Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-04-16T09:54:08.0700712Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-04-16T09:54:08.0731892Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-04-16T09:54:08.1098407Z Cleaning up orphan processes
+2026-04-16T09:54:08.1305104Z Terminate orphan process: pid (2356) (MainThread)
+2026-04-16T09:54:08.1366869Z ##[warning]Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4, actions/setup-node@v4. Actions will be forced to run with Node.js 24 by default starting June 2nd, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

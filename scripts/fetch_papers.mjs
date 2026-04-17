@@ -5,120 +5,93 @@ const PUBMED_SEARCH = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcg
 const PUBMED_FETCH = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi";
 
 const JOURNALS = [
-  "Sports Medicine",
-  "British Journal of Sports Medicine",
-  "The American Journal of Sports Medicine",
-  "Medicine & Science in Sports & Exercise",
-  "Journal of Strength and Conditioning Research",
-  "Journal of Science and Medicine in Sport",
-  "Scandinavian Journal of Medicine & Science in Sports",
-  "European Journal of Sport Science",
-  "International Journal of Sports Physiology and Performance",
-  "Sports Health",
-  "Clinical Journal of Sport Medicine",
-  "Current Sports Medicine Reports",
-  "Journal of Sport and Health Science",
-  "BMJ Open Sport & Exercise Medicine",
-  "PTJ: Physical Therapy & Rehabilitation Journal",
-  "Journal of Orthopaedic & Sports Physical Therapy",
-  "Archives of Physical Medicine and Rehabilitation",
-  "Clinical Rehabilitation",
-  "Disability and Rehabilitation",
-  "Physiotherapy",
-  "Journal of Physiotherapy",
-  "Physical Therapy in Sport",
-  "Journal of Neurologic Physical Therapy",
-  "Neurorehabilitation and Neural Repair",
-  "Musculoskeletal Science and Practice",
-  "Journal of Rehabilitation Medicine",
-  "Nature Neuroscience",
-  "Neuron",
-  "The Journal of Neuroscience",
-  "Neuroscience",
-  "Brain",
-  "Cerebral Cortex",
-  "NeuroImage",
-  "Trends in Neurosciences",
-  "Current Opinion in Neurobiology",
-  "Clinical Neurophysiology",
-  "Frontiers in Neuroscience",
-  "Psychological Science",
-  "Clinical Psychological Science",
-  "Journal of Consulting and Clinical Psychology",
-  "Clinical Psychology Review",
-  "Behaviour Research and Therapy",
-  "Journal of Anxiety Disorders",
-  "Journal of Affective Disorders",
-  "Health Psychology",
-  "Psychology of Sport and Exercise",
-  "Journal of Sport and Exercise Psychology",
-  "Frontiers in Psychology",
+  "American Journal of Clinical Nutrition",
+  "Journal of Nutrition",
+  "Advances in Nutrition",
+  "Current Developments in Nutrition",
+  "Nutrition Reviews",
+  "British Journal of Nutrition",
+  "Nutrition",
+  "Clinical Nutrition",
+  "Clinical Nutrition ESPEN",
+  "Clinical Nutrition Open Science",
+  "Journal of the Academy of Nutrition and Dietetics",
+  "Journal of Human Nutrition and Dietetics",
+  "Nutrients",
+  "European Journal of Clinical Nutrition",
+  "European Journal of Nutrition",
+  "Annals of Nutrition and Metabolism",
+  "Frontiers in Nutrition",
+  "Journal of Nutritional Biochemistry",
+  "Molecular Nutrition & Food Research",
+  "Public Health Nutrition",
+  "Maternal & Child Nutrition",
+  "Obesity Reviews",
+  "International Journal of Obesity",
+  "Appetite",
+  "Journal of Cachexia Sarcopenia and Muscle",
+  "Nutrition Journal",
+  "Nutrition & Dietetics",
+  "Nutrition in Clinical Practice",
+  "Journal of Parenteral and Enteral Nutrition",
+  "Journal of Nutrition Education and Behavior",
+  "Pediatric Obesity",
+  "Clinical Obesity",
 ];
 
 const TOPICS = [
-  "resistance training",
-  "strength training",
-  "hypertrophy",
-  "endurance",
-  "aerobic exercise",
-  "HIIT",
-  "recovery",
-  "sports injury",
-  "concussion",
+  "malnutrition",
+  "nutritional assessment",
+  "nutrition support",
+  "dietary intervention",
+  "medical nutrition therapy",
+  "sarcopenia",
+  "cachexia",
+  "vitamin D",
+  "iron deficiency",
+  "obesity",
+  "insulin resistance",
+  "NAFLD",
+  "metabolic syndrome",
+  "GLP-1",
+  "dietary patterns",
+  "ultra-processed foods",
+  "gut microbiome",
+  "nutrigenomics",
+  "enteral nutrition",
+  "parenteral nutrition",
+  "ICU nutrition",
+  "breastfeeding",
+  "pregnancy nutrition",
+  "omega-3",
+  "micronutrient supplementation",
+  "protein supplementation",
   "body composition",
-  "VO2max",
-  "rehabilitation",
-  "physical therapy",
-  "physiotherapy",
-  "exercise therapy",
-  "manual therapy",
-  "gait",
-  "balance",
-  "pain",
-  "return to sport",
-  "stroke rehabilitation",
-  "motor learning",
-  "neuroplasticity",
-  "neural circuits",
-  "synaptic plasticity",
-  "fMRI",
-  "EEG",
-  "TMS",
-  "cognition",
-  "memory",
-  "hippocampus",
-  "brain stimulation",
-  "psychotherapy",
-  "CBT",
-  "motivation",
-  "self-efficacy",
-  "depression",
-  "anxiety",
-  "burnout",
-  "adherence",
-  "emotion regulation",
-  "mental health",
-  "exercise cognition",
-  "exercise brain health",
-  "BDNF",
-  "executive function",
-  "exercise adherence",
-  "self-determination theory",
-  "athlete mental health",
-  "pain catastrophizing",
-  "fear avoidance",
-  "biopsychosocial rehabilitation",
+  "inflammation diet",
+  "Mediterranean diet",
+  "food bioactive",
+  "nutritional epidemiology",
+  "food environment",
+  "food insecurity",
+  "complementary feeding",
+  "refeeding syndrome",
+  "polyphenols",
+  "diet therapy",
+  "bariatric surgery nutrition",
+  "semaglutide tirzepatide",
 ];
 
-const HEADERS = { "User-Agent": "FitnessBrainBot/1.0 (research aggregator)" };
+const HEADERS = { "User-Agent": "NutritionBrainBot/1.0 (research aggregator)" };
 
-function collectSeenPmids(docsDir = "docs", lookbackDays = 7) {
+function collectSeenPmids(docsDir, lookbackDays) {
   const seen = new Set();
   try {
-    const files = readdirSync(docsDir).filter((f) => f.startsWith("fitness-") && f.endsWith(".html"));
+    const files = readdirSync(docsDir).filter(
+      (f) => f.startsWith("nutrition-") && f.endsWith(".html")
+    );
     const cutoff = new Date(Date.now() - lookbackDays * 86400000);
     for (const f of files) {
-      const dateMatch = f.match(/fitness-(\d{4}-\d{2}-\d{2})\.html/);
+      const dateMatch = f.match(/nutrition-(\d{4}-\d{2}-\d{2})\.html/);
       if (!dateMatch) continue;
       const fileDate = new Date(dateMatch[1]);
       if (fileDate < cutoff) continue;
@@ -132,7 +105,9 @@ function collectSeenPmids(docsDir = "docs", lookbackDays = 7) {
       } catch {}
     }
   } catch {}
-  console.error(`[INFO] Collected ${seen.size} previously seen PMIDs from last ${lookbackDays} days`);
+  console.error(
+    `[INFO] Collected ${seen.size} previously seen PMIDs from last ${lookbackDays} days`
+  );
   return seen;
 }
 
@@ -197,6 +172,7 @@ function parseXml(xml) {
   let match;
   while ((match = articleRegex.exec(xml)) !== null) {
     const block = match[1];
+
     const titleMatch = block.match(/<ArticleTitle>([\s\S]*?)<\/ArticleTitle>/);
     let title = titleMatch ? stripTags(titleMatch[1]).trim() : "";
 
@@ -249,6 +225,7 @@ async function main() {
       days: { type: "string", default: "7" },
       "max-papers": { type: "string", default: "50" },
       output: { type: "string", default: "papers.json" },
+      json: { type: "boolean", default: false },
       "lookback-dedup": { type: "string", default: "0" },
     },
   });
@@ -263,15 +240,19 @@ async function main() {
   }
 
   const query = buildQuery(days);
-  console.error(`[INFO] Searching PubMed for papers from last ${days} days...`);
+  console.error(
+    `[INFO] Searching PubMed for nutrition papers from last ${days} days...`
+  );
 
   let pmids = await searchPapers(query, maxPapers);
-  console.error(`[INFO] Found ${pmids.length} papers`);
+  console.error(`[INFO] Found ${pmids.length} papers from PubMed`);
 
   if (seenPmids.size > 0) {
     const before = pmids.length;
     pmids = pmids.filter((id) => !seenPmids.has(id));
-    console.error(`[INFO] Dedup: ${before} -> ${pmids.length} (removed ${before - pmids.length} already seen)`);
+    console.error(
+      `[INFO] Dedup: ${before} -> ${pmids.length} (removed ${before - pmids.length} already seen in last ${lookbackDedup} days)`
+    );
   }
 
   if (!pmids.length) {
@@ -281,20 +262,20 @@ async function main() {
       papers: [],
     };
     writeFileSync(values.output, JSON.stringify(output, null, 2), "utf-8");
-    console.error("[INFO] No papers found, saved empty result");
+    console.error("[INFO] No new papers found, saved empty result");
     return;
   }
 
   const papers = await fetchDetails(pmids);
   console.error(`[INFO] Fetched details for ${papers.length} papers`);
 
-  const output = {
+  const outputData = {
     date: getTaipeiDate().toISOString().slice(0, 10),
     count: papers.length,
     papers,
   };
 
-  writeFileSync(values.output, JSON.stringify(output, null, 2), "utf-8");
+  writeFileSync(values.output, JSON.stringify(outputData, null, 2), "utf-8");
   console.error(`[INFO] Saved to ${values.output}`);
 }
 

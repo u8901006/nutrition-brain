@@ -1,8 +1,8 @@
-name: Fitness Daily Report
+name: Nutrition Daily Report
 
 on:
   schedule:
-    - cron: "0 12 * * *" # UTC 12:00 = 台北時間 20:00
+    - cron: "0 11 * * *" # UTC 11:00 = 台北時間 19:00
   workflow_dispatch:
     inputs:
       date:
@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: write
+  pages: write
 
 jobs:
   build:
@@ -68,7 +69,7 @@ jobs:
         run: |
           node scripts/generate_report.mjs \
             --input papers.json \
-            --output "docs/fitness-${{ steps.date.outputs.target }}.html" \
+            --output "docs/nutrition-${{ steps.date.outputs.target }}.html" \
             --date "${{ steps.date.outputs.target }}"
 
       - name: Generate index page
@@ -80,13 +81,13 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/
           git diff --cached --quiet && echo "No changes to commit" && exit 0
-          git commit -m "📄 fitness daily report: ${{ steps.date.outputs.target }}"
+          git commit -m "nutrition daily report: ${{ steps.date.outputs.target }}"
           git pull --rebase origin main
           git push
 
       - name: Summary
         run: |
-          echo "### 📄 Fitness Daily Report" >> "$GITHUB_STEP_SUMMARY"
+          echo "### Nutrition Daily Report" >> "$GITHUB_STEP_SUMMARY"
           echo "**Date:** ${{ steps.date.outputs.target }}" >> "$GITHUB_STEP_SUMMARY"
           echo "**Papers analyzed:** ${{ steps.papers.outputs.count }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "**Report:** [fitness-${{ steps.date.outputs.target }}.html](https://u8901006.github.io/fitness-brain/fitness-${{ steps.date.outputs.target }}.html)" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Report:** [nutrition-${{ steps.date.outputs.target }}.html](https://u8901006.github.io/nutrition-brain/nutrition-${{ steps.date.outputs.target }}.html)" >> "$GITHUB_STEP_SUMMARY"

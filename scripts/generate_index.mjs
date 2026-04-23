@@ -3,13 +3,13 @@ import { readdirSync, writeFileSync } from "node:fs";
 const WEEKDAYS = ["日", "一", "二", "三", "四", "五", "六"];
 
 const files = readdirSync("docs")
-  .filter((f) => f.startsWith("fitness-") && f.endsWith(".html") && f !== "index.html")
+  .filter((f) => f.startsWith("nutrition-") && f.endsWith(".html") && f !== "index.html")
   .sort()
   .reverse();
 
 let links = "";
 for (const name of files.slice(0, 60)) {
-  const date = name.replace("fitness-", "").replace(".html", "");
+  const date = name.replace("nutrition-", "").replace(".html", "");
   let dateDisplay = date;
   let weekday = "";
   try {
@@ -27,7 +27,7 @@ const html = `<!DOCTYPE html>
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Fitness Brain · 健身醫學文獻日報</title>
+<title>Nutrition Brain · 營養醫學文獻日報</title>
 <style>
   :root { --bg: #f6f1e8; --surface: #fffaf2; --line: #d8c5ab; --text: #2b2118; --muted: #766453; --accent: #8c4f2b; --accent-soft: #ead2bf; }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -54,9 +54,9 @@ const html = `<!DOCTYPE html>
 </head>
 <body>
 <div class="container">
-  <div class="logo">💪</div>
-  <h1>Fitness Brain</h1>
-  <p class="subtitle">健身醫學/物理治療/神經科學/心理學文獻日報 · 每日自動更新</p>
+  <div class="logo">🥗</div>
+  <h1>Nutrition Brain</h1>
+  <p class="subtitle">營養醫學文獻日報 · 每日自動更新</p>
   <p class="count">共 ${total} 期日報</p>
   <ul>${links}</ul>
   <div class="clinic-banner">
@@ -74,7 +74,7 @@ const html = `<!DOCTYPE html>
     </a>
   </div>
   <footer>
-    <p>Powered by PubMed + Zhipu AI · <a href="https://github.com/u8901006/fitness-brain">GitHub</a></p>
+    <p>Powered by PubMed + Zhipu AI · <a href="https://github.com/u8901006/nutrition-brain">GitHub</a></p>
   </footer>
 </div>
 </body>

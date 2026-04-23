@@ -7,11 +7,11 @@ const MODELS = ["glm-5-turbo", "glm-4.7", "glm-4.7-flash"];
 const MAX_TOKENS = 100000;
 const TIMEOUT = 660000;
 
-const SYSTEM_PROMPT = `你是健身醫學、物理治療、神經科學與心理學領域的資深研究員與科學傳播者。你的任務是：
+const SYSTEM_PROMPT = `你是營養醫學領域的資深研究員與科學傳播者。你的任務是：
 1. 從提供的醫學文獻中，篩選出最具臨床意義與研究價值的論文
 2. 對每篇論文進行繁體中文摘要、分類、PICO 分析
 3. 評估其臨床實用性（高/中/低）
-4. 生成適合醫療專業人員與運動科學研究者閱讀的日報
+4. 生成適合醫療專業人員、研究者與營養師閱讀的日報
 
 輸出格式要求：
 - 語言：繁體中文（台灣用語）
@@ -46,7 +46,7 @@ async function analyzePapers(apiKey, papersData) {
   const paperCount = papersData.count || 0;
   const papersText = JSON.stringify(papersData.papers || [], null, 2);
 
-  const prompt = `以下是 ${dateStr} 從 PubMed 抓取的最新健身醫學/物理治療/神經科學/心理學文獻（共 ${paperCount} 篇）。
+  const prompt = `以下是 ${dateStr} 從 PubMed 抓取的最新營養醫學文獻（共 ${paperCount} 篇）。
 
 請進行以下分析，並以 JSON 格式回傳（不要用 markdown code block）：
 
@@ -72,14 +72,14 @@ async function analyzePapers(apiKey, papersData) {
     { "title_zh": "中文標題", "title_en": "English Title", "journal": "期刊名", "summary": "一句話總結", "clinical_utility": "高/中/低", "tags": ["標籤1"], "url": "連結", "emoji": "emoji" }
   ],
   "keywords": ["關鍵字1"],
-  "topic_distribution": { "運動訓練": 3 }
+  "topic_distribution": { "臨床營養": 3 }
 }
 
 原始文獻資料：
 ${papersText}
 
 請篩選出最重要的 TOP 5-8 篇論文放入 top_picks（按重要性排序），其餘放入 all_papers。
-每篇 paper 的 tags 請從以下選擇：運動訓練、肌力與體能、運動傷害、腦震盪、耐力訓練、HIIT、恢復、身體組成、心肺適能、物理治療、復健醫學、骨科復健、神經復健、疼痛管理、步態訓練、平衡訓練、運動控制、神經可塑性、腦影像、腦刺激、認知功能、記憶、海馬迴、心理治療、CBT、動機、自我效能、憂鬱症、焦慮症、運動心理學、運動依從性、情緒調節、心理健康、BDNF、執行功能、生物力學、運動生理學、老年醫學、兒少發展。
+每篇 paper 的 tags 請從以下選擇：臨床營養、營養支持、營養評估、膳食介入、醫學營養治療、肌少症、惡病質、微量營養素、維生素D、鐵缺乏、肥胖、胰島素抗性、NAFLD、代謝症候群、GLP-1、飲食型態、超加工食品、腸道菌叢、營養基因體學、腸道營養、靜脈營養、ICU營養、母乳哺餵、孕期營養、Omega-3、蛋白質補充、身體組成、發炎與飲食、地中海飲食、食物生物活性物質、營養流行病學、食物環境、糧食不安全、公共衛生營養、兒童營養、老年營養、運動營養、減重藥物、飲食行為、食品安全、營養教育、腸道微生物、多酚類、飲食治療、圍手術期營養、再餵食症候群。
 記住：回傳純 JSON，不要用 \`\`\`json\`\`\` 包裹。`;
 
   const headers = { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" };
@@ -158,16 +158,16 @@ function generateHtml(analysis, usedModel) {
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Fitness Brain &middot; 健身醫學文獻日報 &middot; ${dateDisplay}</title>
-<meta name="description" content="${dateDisplay} 健身醫學/物理治療/神經科學/心理學文獻日報，由 AI 自動彙整 PubMed 最新論文"/>
+<title>Nutrition Brain &middot; 營養醫學文獻日報 &middot; ${dateDisplay}</title>
+<meta name="description" content="${dateDisplay} 營養醫學文獻日報，由 AI 自動彙整 PubMed 最新論文"/>
 <style>${CSS}</style>
 </head>
 <body>
 <div class="container">
   <header>
-    <div class="logo">💪</div>
+    <div class="logo">🥗</div>
     <div class="header-text">
-      <h1>Fitness Brain &middot; 健身醫學文獻日報</h1>
+      <h1>Nutrition Brain &middot; 營養醫學文獻日報</h1>
       <div class="header-meta">
         <span class="badge badge-date">📅 ${dateDisplay}（週${weekday}）</span>
         <span class="badge badge-count">📊 ${totalCount} 篇文獻</span>
@@ -199,7 +199,7 @@ function generateHtml(analysis, usedModel) {
   </div>
   <footer>
     <span>資料來源：PubMed &middot; 分析模型：${escHtml(usedModel)}</span>
-    <span><a href="https://github.com/u8901006/fitness-brain">GitHub</a></span>
+    <span><a href="https://github.com/u8901006/nutrition-brain">GitHub</a></span>
   </footer>
 </div>
 </body>
@@ -210,7 +210,7 @@ async function main() {
   const { values } = parseArgs({
     options: {
       input: { type: "string", default: "papers.json" },
-      output: { type: "string", default: "docs/fitness-today.html" },
+      output: { type: "string", default: "docs/nutrition-today.html" },
       "api-key": { type: "string", default: "" },
       date: { type: "string", default: "" },
     },
@@ -223,13 +223,13 @@ async function main() {
   if (!papersData || !papersData.papers?.length) {
     console.error("[WARN] No papers found, generating empty report");
     const dateStr = values.date || new Date().toISOString().slice(0, 10);
-    analysis = { date: dateStr, market_summary: "今日 PubMed 暫無新的健身醫學/物理治療/神經科學/心理學文獻更新。請明天再查看。", top_picks: [], all_papers: [], keywords: [], topic_distribution: {} };
+    analysis = { date: dateStr, market_summary: "今日 PubMed 暫無新的營養醫學文獻更新。請明天再查看。", top_picks: [], all_papers: [], keywords: [], topic_distribution: {} };
   } else {
     analysis = await analyzePapers(apiKey, papersData);
     if (!analysis) { console.error("[ERROR] Analysis failed, cannot generate report"); process.exit(1); }
   }
   const targetDate = values.date || analysis.date || new Date().toISOString().slice(0, 10);
-  const outputFile = values.output === "docs/fitness-today.html" ? `docs/fitness-${targetDate}.html` : values.output;
+  const outputFile = values.output === "docs/nutrition-today.html" ? `docs/nutrition-${targetDate}.html` : values.output;
   const html = generateHtml(analysis, usedModel);
   mkdirSync(dirname(outputFile), { recursive: true });
   writeFileSync(outputFile, html, "utf-8");

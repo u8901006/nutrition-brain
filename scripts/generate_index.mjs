@@ -74,7 +74,7 @@ const html = `<!DOCTYPE html>
     </a>
   </div>
   <footer>
-    <p>Powered by PubMed + Zhipu AI · <a href="https://github.com/u8901006/nutrition-brain">GitHub</a></p>
+    <p>Powered by PubMed + NVIDIA AI · <a href="https://github.com/u8901006/nutrition-brain">GitHub</a></p>
   </footer>
 </div>
 </body>

@@ -2,9 +2,9 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { parseArgs } from "node:util";
 import { dirname } from "node:path";
 
-const API_BASE = process.env.ZHIPU_API_BASE || "https://open.bigmodel.cn/api/coding/paas/v4";
-const MODELS = ["glm-5-turbo", "glm-4.7", "glm-4.7-flash"];
-const MAX_TOKENS = 100000;
+const API_BASE = 'https://integrate.api.nvidia.com/v1';
+const MODELS = ['nvidia/nemotron-3-super-120b-a12b', 'nvidia/nemotron-3-nano-30b-a3b'];
+const MAX_TOKENS = 16384;
 const TIMEOUT = 660000;
 
 const SYSTEM_PROMPT = `你是營養醫學領域的資深研究員與科學傳播者。你的任務是：
@@ -90,7 +90,7 @@ ${papersText}
         console.error(`[INFO] Trying ${model} (attempt ${attempt + 1})...`);
         const resp = await fetch(`${API_BASE}/chat/completions`, {
           method: "POST", headers,
-          body: JSON.stringify({ model, messages: [{ role: "system", content: SYSTEM_PROMPT }, { role: "user", content: prompt }], temperature: 0.3, top_p: 0.9, max_tokens: MAX_TOKENS }),
+          body: JSON.stringify({ model, messages: [{ role: "system", content: SYSTEM_PROMPT }, { role: "user", content: prompt }], temperature: 1.0, top_p: 0.95, max_tokens: MAX_TOKENS, stream: false, chat_template_kwargs: { enable_thinking: false } }),
           signal: AbortSignal.timeout(TIMEOUT),
         });
         if (resp.status === 429) { const w = 60000 * (attempt + 1); console.error(`[WARN] Rate limited, waiting ${w/1000}s...`); await new Promise(r => setTimeout(r, w)); continue; }
@@ -171,7 +171,7 @@ function generateHtml(analysis, usedModel) {
       <div class="header-meta">
         <span class="badge badge-date">📅 ${dateDisplay}（週${weekday}）</span>
         <span class="badge badge-count">📊 ${totalCount} 篇文獻</span>
-        <span class="badge badge-source">Powered by PubMed + Zhipu AI</span>
+        <span class="badge badge-source">Powered by PubMed + NVIDIA AI</span>
       </div>
     </div>
   </header>
@@ -215,8 +215,8 @@ async function main() {
       date: { type: "string", default: "" },
     },
   });
-  const apiKey = values["api-key"] || process.env.ZHIPU_API_KEY || "";
-  if (!apiKey) { console.error("[ERROR] No API key. Set ZHIPU_API_KEY env var or use --api-key"); process.exit(1); }
+  const apiKey = values["api-key"] || process.env.NVIDIA_API_KEY || "";
+  if (!apiKey) { console.error("[ERROR] No API key. Set NVIDIA_API_KEY env var or use --api-key"); process.exit(1); }
   const papersData = loadPapers(values.input);
   let analysis;
   let usedModel = MODELS[0];
